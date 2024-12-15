@@ -16,16 +16,38 @@ canvas.addEventListener("touchstart", start, false)
 canvas.addEventListener("touchmove", draw, false)
 canvas.addEventListener("mousedown", start, false)
 canvas.addEventListener("mousemove", draw, false)
-
+canvas.addEventListener("mouseover",moveToCanvas,false)
 
 canvas.addEventListener("touchend", stop, false);
-canvas.addEventListener("mouseup", (event) => stop(event, "mouseup"), false);
-canvas.addEventListener("mouseout", (event) => stop(event, "mouseout"), false);
+
 function start(event) {
     is_drawing = true;
     context.beginPath();
     context.moveTo(event.clientX - event.offsetLeft, event.clientY - event.offsetTop);
     event.preventDefault();
+}
+
+let isMouseHolding = false; 
+window.addEventListener("mousedown", (event) => {
+    if (event.button === 0) { 
+        isMouseHolding = true;
+    }
+});
+
+window.addEventListener("mouseup", (event) => {
+    if (event.button === 0) { 
+        isMouseHolding = false;
+        stop(event);
+    }
+});
+
+
+function moveToCanvas(event)
+{
+    if(isMouseHolding)
+    {
+        start(event);
+    }
 }
 
 //draw
@@ -51,11 +73,9 @@ function stop(event, type) {
     event.preventDefault();
 
     //after stopping draw we save current state of canvas
-    if (type === "mouseup" || type === "mouseout" && is_drawing) {
-        canvasStates.push(context.getImageData(0, 0, canvas.width, canvas.height));
-        index += 1;
-        is_drawing = false;
-    }
+    canvasStates.push(context.getImageData(0, 0, canvas.width, canvas.height));
+    index += 1;
+    is_drawing = false;
    
 }
 
@@ -99,4 +119,16 @@ function undo(e) {
             context.putImageData(canvasStates[index], 0, 0);
         }
     }
+}
+
+
+//change color
+let blackPen = document.getElementById("blackPen");
+let redPen= document.getElementById("redPen");
+blackPen.addEventListener("click", () => changeColor("black"), false);
+redPen.addEventListener("click", () => changeColor("red"), false);
+
+function changeColor(color){
+    console.log(color)
+    draw_color = color
 }
