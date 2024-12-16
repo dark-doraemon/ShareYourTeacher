@@ -109,7 +109,8 @@ undoButton.addEventListener('click', undo, false);
 let canvasStates = [];
 let index = -1 // don't draw anything
 function undo(e) {
-    if (e.ctrlKey && e.key === 'z' || e.target.id === 'undoCanvas') {
+    
+    if ((e.ctrlKey && e.key === 'z') || e.target.id === 'undoCanvas') {
         if (index <= 0) {
             clearCanvas();
         }
