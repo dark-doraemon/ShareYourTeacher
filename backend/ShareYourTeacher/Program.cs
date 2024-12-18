@@ -1,4 +1,6 @@
 
+using ShareYourTeacher.API.SingalR;
+
 namespace ShareYourTeacher;
 
 public class Program
@@ -6,6 +8,11 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddSignalR(options => {
+            options.MaximumReceiveMessageSize = 1024 * 1024 * 1000;
+        });
+        builder.Services.AddCors();
 
         // Add services to the container.
         builder.Services.AddAuthorization();
@@ -21,7 +28,7 @@ public class Program
             app.MapOpenApi();
         }
 
-        app.UseHttpsRedirection();
+        // app.UseHttpsRedirection();
 
         app.UseAuthorization();
 
@@ -30,9 +37,17 @@ public class Program
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        app.UseCors(policy =>
+            policy.WithOrigins("http://127.0.0.1:5500") // Chỉ định nguồn gốc cụ thể
+                    .AllowAnyHeader()  // Cho phép mọi header
+                    .AllowAnyMethod()  // Cho phép mọi phương thức HTTP
+                    .AllowCredentials()); // Cho phép gửi thông tin xác thực (cookie, v.v.)
+
+        // app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+        app.MapHub<PresenceHub>("hub/presence");
         app.MapGet("/weatherforecast", (HttpContext httpContext) =>
         {
-            var forecast =  Enumerable.Range(1, 5).Select(index =>
+            var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
                 {
                     Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
