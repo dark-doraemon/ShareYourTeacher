@@ -44,7 +44,7 @@ public class Program
                     .AllowCredentials()); // Cho phép gửi thông tin xác thực (cookie, v.v.)
 
         // app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-        app.MapHub<PresenceHub>("hub/presence");
+        app.MapHub<DrawHub>("hub/presence");
         app.MapGet("/weatherforecast", (HttpContext httpContext) =>
         {
             var forecast = Enumerable.Range(1, 5).Select(index =>

@@ -100,6 +100,7 @@ function draw(event) {
         context.lineCap = "round";
         context.lineJoin = "round";
         context.stroke();
+        Sendbase64ImageToServer()
     }
     event.preventDefault();
 }
@@ -117,27 +118,49 @@ function stop(event, type) {
     canvasStates.push(context.getImageData(0, 0, canvas.width, canvas.height));
     index += 1;
     is_drawing = false;
-    console.log(canvasStates[index]);
-    const payload = {
-        width: canvasStates[index].width,
-        height: canvasStates[index].height,
-        data: Array.from(canvasStates[index].data),
-        colorSpace: canvasStates[index].colorSpace
-    }
-    console.log(payload)
-    connection.invoke("Draw", payload).catch(err => {
+
+    //ta có thể dùng truyền DataImage để truyền dữ liệu cho server nhưng nó không tối ưu (rất lag)
+    // const payload = {
+    //     width: canvasStates[index].width,
+    //     height: canvasStates[index].height,
+    //     data: Array.from(canvasStates[index].data),
+    //     colorSpace: canvasStates[index].colorSpace
+    // }
+    // connection.invoke("Draw", payload).catch(err => {
+    //     console.error("Error sending data to server:", err);
+    // });
+
+    //sử dụng base64 để truyền
+    // Sendbase64ImageToServer()
+}
+
+function Sendbase64ImageToServer()
+{
+    const base64Image = canvas.toDataURL("image/png");
+    connection.invoke("Draw", base64Image).catch(err => {
         console.error("Error sending data to server:", err);
     });
 }
 
-connection.on("ReceiveDrawData", (image) => {
-    // Vẽ lại canvas từ dữ liệu nhận được
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+//vễ bằng DataImage
+// connection.on("ReceiveDrawData", (image) => {
+//     // Vẽ lại canvas từ dữ liệu nhận được
+//     const canvas = document.getElementById("canvas");
+//     const ctx = canvas.getContext("2d");
 
-    const imageData = ctx.createImageData(image.width, image.height);
-    imageData.data.set(new Uint8ClampedArray(image.data)); // Gắn dữ liệu pixel
-    ctx.putImageData(imageData, 0, 0); // Vẽ lên canvas
+//     const imageData = ctx.createImageData(image.width, image.height);
+//     imageData.data.set(new Uint8ClampedArray(image.data)); // Gắn dữ liệu pixel
+//     ctx.putImageData(imageData, 0, 0); // Vẽ lên canvas
+// });
+
+//vẽ bằng base64
+connection.on("ReceiveDrawData", (base64Image) => {
+    const img = new Image();
+    //onload dược gọi hình src được tải xong, hình src được tải xong onload được kích hoạt
+    img.onload = () => {
+        context.drawImage(img, 0, 0);
+    }
+    img.src = base64Image;
 });
 
 
@@ -152,7 +175,6 @@ function updatePenSize(e) {
 }
 
 
-
 //clear
 let clearButton = document.getElementById("clearCanvas");
 clearButton.addEventListener("click", clearCanvas)
@@ -163,6 +185,7 @@ function clearCanvas() {
 
     canvasStates = [];
     index = -1;
+    Sendbase64ImageToServer()
 }
 
 
@@ -184,6 +207,7 @@ function undo(e) {
             canvasStates.pop();
             context.putImageData(canvasStates[index], 0, 0);
         }
+        Sendbase64ImageToServer();
     }
 }
 
