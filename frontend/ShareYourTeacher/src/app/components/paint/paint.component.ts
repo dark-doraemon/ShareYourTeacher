@@ -8,8 +8,12 @@ import { ColorPickerModule } from 'ngx-color-picker';
     styleUrl: './paint.component.css'
 })
 export class PaintComponent {
-    color: string = '#FF0000'; // Giá trị mặc định
+    color: string = '#000000'; // Giá trị mặc định
     penSize: number = 5;
 
     
+    ChangeColor(color: string)
+    {
+        this.color = color
+    }
 }
