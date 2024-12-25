@@ -1,0 +1,93 @@
+/* #list {
+    position: relative;
+    display: flex;
+    justify-content: center;
+} */
+
+.textbox {
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+
+}
+
+.box {
+    background-color: transparent;
+    /* background-color: #333; */
+    /* width: 170px; */
+    /* height: 22px; */
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+}
+
+.dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: grab;
+}
+
+
+.top-left {
+    top: -5px;
+    left: -5px;
+}
+
+
+.top-right {
+    right: -5px;
+    top: -5px;
+}
+
+.bottom-left {
+    bottom: -5px;
+    left: -5px;
+}
+
+.bottom-right {
+    right: -5px;
+    bottom: -5px;
+}
+
+.top-center {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bottom-center {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 100%;
+}
+
+
+.left-center {
+    bottom: 50%;
+    left: -5px;
+    transform: translateY(50%);
+}
+
+.right-center {
+    bottom: 50%;
+    right: -5px;
+    transform: translate(0%, 50%);
+}
