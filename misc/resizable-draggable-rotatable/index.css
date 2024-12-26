@@ -1,7 +1,7 @@
 .box {
     position: absolute;
-    width: 300px;
-    height: 200px;
+    width: 200px;
+    height: 100px;
     cursor: move;
     user-select: none;
     transform-origin: center center;

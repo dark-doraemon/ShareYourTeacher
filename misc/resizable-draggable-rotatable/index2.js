@@ -8,10 +8,16 @@ let currentResizer;
 let startX, startY, startWidth, startHeight, startLeft, startTop;
 let currentRotation = 0;
 
+const sizeLimit = {
+    minWidth: 200,
+    minHeight: 100,
+    maxWidth: window.innerWidth - 10,
+    maxHeight: window.innerHeight - 10,
+}
+
 function checkTextareaContent() {
     if (textarea.value.trim() === '') {
-        if(box.style.border === 'none' || box.style.border === '')
-        {
+        if (box.style.border === 'none' || box.style.border === '') {
             textarea.style.border = '1px solid #ccc';
         }
     }
@@ -27,15 +33,15 @@ checkTextareaContent();
 // Di chuyển box
 box.addEventListener('mousedown', function (e) {
     if (e.target === box || e.target.tagName === 'TEXTAREA') {
-            
+
         //xuất hiện border và dot
         textarea.style.border = 'none'
         resizers.forEach(resizer => {
             resizer.style.display = 'inline'
         })
         box.style.border = "2px solid #333"
-        rotateLine.style.display= 'inline';
-        rotateHandle.style.display= 'inline';
+        rotateLine.style.display = 'inline';
+        rotateHandle.style.display = 'inline';
         isDragging = true;
         startX = e.clientX - box.offsetLeft;
         startY = e.clientY - box.offsetTop;
@@ -52,8 +58,8 @@ document.addEventListener('mousedown', (event) => {
             resizer.style.display = 'none'
         });
         box.style.border = 'none'
-        rotateLine.style.display= 'none';
-        rotateHandle.style.display= 'none';
+        rotateLine.style.display = 'none';
+        rotateHandle.style.display = 'none';
         checkTextareaContent();
     }
 });
@@ -91,6 +97,11 @@ resizers.forEach(resizer => {
     });
 });
 
+function clamp(value, min, max) {
+   return Math.min(Math.max(value, min), max);
+}
+
+
 document.addEventListener('mousemove', function (e) {
     if (isDragging) {
         e.preventDefault();
@@ -116,38 +127,56 @@ document.addEventListener('mousemove', function (e) {
         const dy = e.clientY - startY;
 
         if (currentResizer.classList.contains('bottom-right')) {
-            box.style.width = startWidth + dx + 'px';
-            box.style.height = startHeight + dy + 'px';
+            const newWidth = clamp(startWidth + dx, sizeLimit.minWidth,sizeLimit.maxWidth);
+            const newHeight = clamp(startHeight + dy, sizeLimit.minHeight, sizeLimit.maxHeight);
+            box.style.width = newWidth + 'px';
+            box.style.height = newHeight + 'px';
         }
         else if (currentResizer.classList.contains('bottom-left')) {
-            box.style.width = startWidth - dx + 'px';
-            box.style.left = startLeft + dx + 'px';
-            box.style.height = startHeight + dy + 'px';
+            const newWidth = clamp(startWidth - dx,sizeLimit.minWidth, sizeLimit.maxWidth);
+            const newHeight = clamp(startHeight + dy, sizeLimit.minHeight, sizeLimit.maxHeight);
+            const newLeft = clamp(startLeft + dx, 0, sizeLimit.maxWidth - newWidth);
+            box.style.width = newWidth + 'px';
+            box.style.left = newLeft + 'px';
+            box.style.height = newHeight + 'px';
         }
         else if (currentResizer.classList.contains('top-right')) {
-            box.style.width = startWidth + dx + 'px';
-            box.style.height = startHeight - dy + 'px';
-            box.style.top = startTop + dy + 'px';
+            const newWidth = clamp(startWidth + dx, sizeLimit.minWidth, sizeLimit.maxWidth);
+            const newHeight = clamp(startHeight - dy, sizeLimit.minHeight, sizeLimit.maxHeight);
+            const newTop = clamp(startTop + dy, 0, sizeLimit.maxHeight - newHeight);
+            box.style.width = newWidth + 'px';
+            box.style.height = newHeight + 'px';
+            box.style.top = newTop + 'px';
         }
         else if (currentResizer.classList.contains('top-left')) {
-            box.style.width = startWidth - dx + 'px';
-            box.style.height = startHeight - dy + 'px';
-            box.style.top = startTop + dy + 'px';
-            box.style.left = startLeft + dx + 'px';
+            const newWidth = clamp(startWidth - dx, sizeLimit.minWidth, sizeLimit.maxWidth);
+            const newHeight = clamp(startHeight - dy, sizeLimit.minHeight,sizeLimit.maxHeight);
+            const newLeft = clamp(startLeft + dx, 0,sizeLimit.maxWidth - newWidth);
+            const newTop = clamp(startTop + dy, 0, sizeLimit.maxHeight - newHeight);
+            box.style.width = newWidth + 'px';
+            box.style.height = newHeight + 'px';
+            box.style.top = newTop + 'px';
+            box.style.left = newLeft + 'px';
         }
         else if (currentResizer.classList.contains('top-center')) {
-            box.style.height = startHeight - dy + 'px';
-            box.style.top = startTop + dy + 'px';
+            const newHeight = clamp(startHeight - dy, sizeLimit.minHeight, sizeLimit.maxHeight);
+            const newTop = clamp(startTop + dy, 0, sizeLimit.maxHeight - newHeight);
+            box.style.height = newHeight + 'px';
+            box.style.top = newTop + 'px';
         }
         else if (currentResizer.classList.contains('bottom-center')) {
-            box.style.height = startHeight + dy + 'px';
+            const newHeight = clamp(startHeight + dy, sizeLimit.minHeight, sizeLimit.maxHeight);
+            box.style.height = newHeight + 'px';
         }
         else if (currentResizer.classList.contains('left-center')) {
-            box.style.width = startWidth - dx + 'px';
-            box.style.left = startLeft + dx + 'px';
+            const newWidth = clamp(startWidth - dx, sizeLimit.minWidth, sizeLimit.maxWidth);
+            const newLeft = clamp(startLeft + dx, 0, sizeLimit.maxWidth - newWidth);
+            box.style.width = newWidth + 'px';
+            box.style.left = newLeft + 'px';
         }
         else if (currentResizer.classList.contains('right-center')) {
-            box.style.width = startWidth + dx + 'px';
+            const newWidth = clamp(startWidth + dx, sizeLimit.minWidth, sizeLimit.maxWidth);
+            box.style.width = newWidth + 'px';
         }
     }
 });
