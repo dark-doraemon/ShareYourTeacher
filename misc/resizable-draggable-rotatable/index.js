@@ -11,6 +11,7 @@ let cursor = {
 
 document.addEventListener('mousedown', (event) => {
     if (event.target.classList.contains('box')) {
+    // if (event.target.tagName === 'TEXTAREA') {
         event.preventDefault();
         cursor = {
             x: event.clientX,

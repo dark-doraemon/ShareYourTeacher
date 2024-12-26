@@ -4,20 +4,13 @@
     justify-content: center;
 } */
 
-.textbox {
-    width: 100%;
-    height: 100%;
-    border: none;
-    box-sizing: border-box;
-    padding: 5px;
-    font-size: 14px;
-    outline: none;
-}
 
 textarea {
     width: 100%;
     height: 100%;
     border: none;
+    resize: none;
+    padding: 10px;
     background-color: transparent;
     box-sizing: border-box;
 
