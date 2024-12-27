@@ -1,6 +1,7 @@
 const box = document.querySelector('.box');
 const textarea = box.querySelector('textarea');
 const rotateLine = box.querySelector('.rotate-line');
+const createBtn = document.getElementById('createBtn');
 let isDragging = false;
 let isResizing = false;
 let isRotating = false;
@@ -14,6 +15,13 @@ const sizeLimit = {
     maxWidth: window.innerWidth - 10,
     maxHeight: window.innerHeight - 10,
 }
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(0,0);
+ctx.lineTo(200,100);
+ctx.stroke();
+
 
 function checkTextareaContent() {
     if (textarea.value.trim() === '') {
