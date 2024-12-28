@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TextboxComponent } from "../textbox/textbox.component";
 @Component({
     selector: 'app-paint',
-    imports: [ColorPickerModule, FormsModule],
+    imports: [ColorPickerModule, FormsModule, TextboxComponent],
     templateUrl: './paint.component.html',
     styleUrl: './paint.component.css'
 })

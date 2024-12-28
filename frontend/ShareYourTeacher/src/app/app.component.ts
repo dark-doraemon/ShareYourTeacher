@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, PaintComponent,ColorPickerModule,FormsModule],
+    imports: [PaintComponent,ColorPickerModule,FormsModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })

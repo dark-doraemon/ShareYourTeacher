@@ -4,13 +4,3 @@ canvas {
     display: block;
 }
 
-.color-box {
-    width: 100%;
-    /* Chiều rộng tự động theo cột */
-    height: 50px;
-    /* Chiều cao của hộp */
-    border-radius: 8px;
-    /* Bo tròn góc */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Hiệu ứng đổ bóng */
-}
