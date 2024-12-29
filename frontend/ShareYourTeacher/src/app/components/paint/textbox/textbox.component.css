@@ -33,6 +33,7 @@ textarea {
     background-color: lightblue;
     /* display: none; */
     position: absolute;
+    cursor: grab;
 }
 
 

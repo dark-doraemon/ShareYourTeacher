@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Output, ViewChild } from '@angular/core';
 import { ResizeAnchorType, ResizeDirectionType } from './resizertype';
 
 @Component({
@@ -164,5 +164,12 @@ export class TextboxComponent implements AfterViewInit {
 
         this._document.addEventListener('mousemove', duringResize);
         this._document.addEventListener('mouseup', finishResize);
+    }
+
+    @Output() focusEvent = new EventEmitter<TextboxComponent>();
+
+    onFocus()
+    {
+        this.focusEvent.emit(this);
     }
 }

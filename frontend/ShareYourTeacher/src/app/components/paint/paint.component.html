@@ -21,26 +21,38 @@
                 <div class="col-sm-3">
                     <div class="color-box bg-warning" (click)='ChangeColor("#FFC300")'></div>
                 </div>
-            </div>`
-            <div class="mt-3">Pen size
-                <input type="range" [(ngModel)]="penSize" [min]="1" [max]="10"> {{penSize}}
+            </div>
+            <div class="mt-3">
+                <div>Pen size
+                    <img src="https://img.icons8.com/?size=20&id=R5YMXudYjnK2&format=png&color=000000"/>
+                </div>
+                <input type="range" [(ngModel)]="penSize" [min]="1" [max]="10" class="w-75"> {{penSize}}
             </div>
             <div class="row mt-3">
                 <div class="col-auto">
-                    <button class="btn btn-primary me-2">Undo</button>
-                    <button class="btn btn-danger">Clear</button>
+                    <button class="btn btn-primary me-2">Undo
+                        <img src="https://img.icons8.com/?size=25&id=QXETd5g3MDpT&format=png&color=000000"/>
+                    </button>
+                    <button class="btn btn-danger">Clear
+                        <img src="https://img.icons8.com/?size=25&id=j2dJjJUSwDCV&format=png&color=000000"/>
+                    </button>
                 </div>
             </div>
 
             <div class="mt-3">
-                <button class="btn btn-warning">Erase</button>
+                <button class="btn btn-warning">
+                    Eraser
+                    <img src="https://img.icons8.com/?size=25&id=xXHEIuHyuJ5y&format=png&color=000000"/>
+                </button>
             </div>
 
             <div class="mt-3">
                 <div>
                     Text box
                 </div>
-                <button class="btn btn-primary" (click)="CreateTextBox()">Create btn</button>
+                <button class="btn" (click)="CreateTextBox()">
+                    <img src="https://img.icons8.com/?size=50&id=BijzNrcR4zEY&format=png&color=000000"/>
+                </button>
             </div>
 
             <div class="mt-3">
