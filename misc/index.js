@@ -225,4 +225,7 @@ function changeColor(color) {
 
 
 
-
+const eraser = document.getElementById('eraser');
+eraser.addEventListener('click',(event) =>{
+    changeColor('#fff');
+})
