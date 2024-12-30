@@ -45,7 +45,7 @@ const canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth - 100;
 canvas.height = 700;
 canvas.border = "black"
-
+let isPen = false;  
 
 let context = canvas.getContext('2d');
 context.fillStyle = 'white';
@@ -93,7 +93,7 @@ function moveToCanvas(event) {
 
 //draw
 function draw(event) {
-    if (is_drawing) {
+    if (is_drawing ) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         context.strokeStyle = draw_color;
         context.lineWidth = draw_width;
@@ -172,6 +172,16 @@ let penSize = document.getElementsByClassName('lineWidth')[0];
 penSize.addEventListener('input', updatePenSize);
 function updatePenSize(e) {
     draw_width = e.target.value;
+    let newPenSize = 20;
+    if(draw_width > 5)
+    {   
+        newPenSize = (draw_width * 20) / 5;
+        if(newPenSize >= 120)
+        {
+            newPenSize = 120;
+        }
+    }   
+    canvas.style.cursor = `url(https://img.icons8.com/?size=${newPenSize}&id=22231&format=png&color=000000) 0 ${newPenSize}, auto`
 }
 
 
@@ -227,5 +237,22 @@ function changeColor(color) {
 
 const eraser = document.getElementById('eraser');
 eraser.addEventListener('click',(event) =>{
+    let newPenSize = 20;
+    if(draw_width > 5)
+    {   
+        newPenSize = (draw_width * 20) / 5;
+        if(newPenSize >= 120)
+        {
+            newPenSize = 120;
+        }
+
+    }   
+    canvas.style.cursor = `url(https://img.icons8.com/?size=${newPenSize}&id=8181&format=png&color=000000) 0 ${newPenSize }, auto`
     changeColor('#fff');
 })
+
+let eraserImage = 'https://img.icons8.com/?size=20&id=8181&format=png&color=000000';
+let penImage = 'https://img.icons8.com/?size=20&id=22231&format=png&color=000000';
+
+
+
