@@ -133,3 +133,10 @@ function changeColor(color){
     console.log(color)
     draw_color = color
 }
+
+
+
+const eraser = document.getElementById('eraser');
+eraser.addEventListener('click',(event) =>{
+    changeColor('#fff');
+})
