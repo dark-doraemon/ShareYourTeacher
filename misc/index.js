@@ -1,51 +1,8 @@
-// import * as signalR from "./SingalR/node_modules/@microsoft/signalr/dist/esm"
-// const signalR = require('./SingalR/node_modules/@microsoft/signalr'
-// import { HubConnection} from "./SingalR/node_modules/@microsoft/signalr"
-
-const connection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:5091/hub/presence")
-    .configureLogging(signalR.LogLevel.Information)
-    .build();
-
-connection.start().then(() => {
-    console.log("Connected successfully");
-}).catch((error) => {
-    console.log(error);
-});
-//connect
-let connectButton = document.getElementById("connect");
-connectButton.addEventListener('click', () => {
-    connection.start().then(() => {
-        console.log("Connected successfully");
-    }).catch((error) => {
-        console.log(error);
-    });
-})
-
-//disconnect
-let disconnect = document.getElementById("disconnect");
-disconnect.addEventListener('click', () => {
-    connection.stop().then().catch(error => {
-        console.log(error)
-    });
-});
-
-
-//tạo hàm có tên UserIsOnline (hàm này sẽ được gọi ở phía server)
-connection.on("UserIsOnline", connectionId => {
-    console.log(connectionId);
-});
-
-connection.on("UserIsOffline", connectionId => {
-    console.log(connectionId);
-});
-
-
 const canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth - 100;
 canvas.height = 700;
 canvas.border = "black"
-let isPen = false;  
+let isPen = false;
 
 let context = canvas.getContext('2d');
 context.fillStyle = 'white';
@@ -93,14 +50,13 @@ function moveToCanvas(event) {
 
 //draw
 function draw(event) {
-    if (is_drawing ) {
+    if (is_drawing) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         context.strokeStyle = draw_color;
         context.lineWidth = draw_width;
         context.lineCap = "round";
         context.lineJoin = "round";
         context.stroke();
-        Sendbase64ImageToServer()
     }
     event.preventDefault();
 }
@@ -119,70 +75,23 @@ function stop(event, type) {
     index += 1;
     is_drawing = false;
 
-    //ta có thể dùng truyền DataImage để truyền dữ liệu cho server nhưng nó không tối ưu (rất lag)
-    // const payload = {
-    //     width: canvasStates[index].width,
-    //     height: canvasStates[index].height,
-    //     data: Array.from(canvasStates[index].data),
-    //     colorSpace: canvasStates[index].colorSpace
-    // }
-    // connection.invoke("Draw", payload).catch(err => {
-    //     console.error("Error sending data to server:", err);
-    // });
-
-    //sử dụng base64 để truyền
-    // Sendbase64ImageToServer()
 }
 
-function Sendbase64ImageToServer()
-{
-    const base64Image = canvas.toDataURL("image/png");
-    connection.invoke("Draw", base64Image).catch(err => {
-        console.error("Error sending data to server:", err);
-    });
-}
-
-//vễ bằng DataImage
-// connection.on("ReceiveDrawData", (image) => {
-//     // Vẽ lại canvas từ dữ liệu nhận được
-//     const canvas = document.getElementById("canvas");
-//     const ctx = canvas.getContext("2d");
-
-//     const imageData = ctx.createImageData(image.width, image.height);
-//     imageData.data.set(new Uint8ClampedArray(image.data)); // Gắn dữ liệu pixel
-//     ctx.putImageData(imageData, 0, 0); // Vẽ lên canvas
-// });
-
-//vẽ bằng base64
-connection.on("ReceiveDrawData", (base64Image) => {
-    const img = new Image();
-    //onload dược gọi hình src được tải xong, hình src được tải xong onload được kích hoạt
-    img.onload = () => {
-        context.drawImage(img, 0, 0);
-    }
-    img.src = base64Image;
-});
-
-
-function drawFromData(drawData) {
-    context.fillRect(drawData);
-}
 //update pen size
 let penSize = document.getElementsByClassName('lineWidth')[0];
 penSize.addEventListener('input', updatePenSize);
 function updatePenSize(e) {
     draw_width = e.target.value;
     let newPenSize = 20;
-    if(draw_width > 5)
-    {   
+    if (draw_width > 5) {
         newPenSize = (draw_width * 20) / 5;
-        if(newPenSize >= 120)
-        {
+        if (newPenSize >= 120) {
             newPenSize = 120;
         }
-    }   
+    }
     canvas.style.cursor = `url(https://img.icons8.com/?size=${newPenSize}&id=22231&format=png&color=000000) 0 ${newPenSize}, auto`
 }
+
 
 
 //clear
@@ -195,7 +104,6 @@ function clearCanvas() {
 
     canvasStates = [];
     index = -1;
-    Sendbase64ImageToServer()
 }
 
 
@@ -217,7 +125,6 @@ function undo(e) {
             canvasStates.pop();
             context.putImageData(canvasStates[index], 0, 0);
         }
-        Sendbase64ImageToServer();
     }
 }
 
@@ -236,18 +143,16 @@ function changeColor(color) {
 
 
 const eraser = document.getElementById('eraser');
-eraser.addEventListener('click',(event) =>{
+eraser.addEventListener('click', (event) => {
     let newPenSize = 20;
-    if(draw_width > 5)
-    {   
+    if (draw_width > 5) {
         newPenSize = (draw_width * 20) / 5;
-        if(newPenSize >= 120)
-        {
+        if (newPenSize >= 120) {
             newPenSize = 120;
         }
 
-    }   
-    canvas.style.cursor = `url(https://img.icons8.com/?size=${newPenSize}&id=8181&format=png&color=000000) 0 ${newPenSize }, auto`
+    }
+    canvas.style.cursor = `url(https://img.icons8.com/?size=${newPenSize}&id=8181&format=png&color=000000) 0 ${newPenSize}, auto`
     changeColor('#fff');
 })
 
