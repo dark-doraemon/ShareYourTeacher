@@ -1,18 +1,20 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
-import { isReactive } from '@angular/core/primitives/signals';
+import { AfterViewInit, Component, ComponentRef, ElementRef, HostListener, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { every } from 'rxjs';
+import { TextboxComponent } from "./textbox/textbox.component";
 @Component({
     selector: 'app-paint',
     imports: [ColorPickerModule, FormsModule],
     templateUrl: './paint.component.html',
     styleUrl: './paint.component.css'
 })
-export class PaintComponent implements AfterViewInit {
+export class PaintComponent implements AfterViewInit{
     @ViewChild('canvas') myCanvas!: ElementRef;
     myCanvasNative: HTMLCanvasElement;
     draw_color: string = '#000000'; // Giá trị mặc định
+    @ViewChild('textboxContainer',{read:ViewContainerRef}) container!: ViewContainerRef;
+    textBoxComponents : ComponentRef<TextboxComponent>[] = [];
+    selectedTextbox : ComponentRef<TextboxComponent> | null = null;
     penSize: number = 5;
     cursorSize: number = 20;
     context: CanvasRenderingContext2D = null;
@@ -99,16 +101,37 @@ export class PaintComponent implements AfterViewInit {
 
     @HostListener('window:keydown', ['$event'])
     KeyDownUndo(event: KeyboardEvent) {
-        if ((event.ctrlKey && event.key == 'z') ) {
+        if ((event.ctrlKey && event.key === 'Z') ) {
             this.HandleUndo();
         }
+        else if(event.key === 'DELETE')
+        {
+            this.DeleteSelectedTextbox();
+        }
+    }
+
+
+    CreateTextBox()
+    {
+        const newTextbox = this.container.createComponent(TextboxComponent);
+        
+        newTextbox.instance.focusEvent.subscribe((textbox: TextboxComponent) =>{
+            this.onTextboxFocus(newTextbox);
+        });
+
+        this.textBoxComponents.push(newTextbox)
+    }
+
+    onTextboxFocus(textboxRef: ComponentRef<TextboxComponent>) {
+        this.selectedTextbox = textboxRef;
+        // console.log('Selected textbox:', textboxRef.instance); 
     }
 
     ClickUndo(event)
     {
+        event.preventDefault();
         this.HandleUndo()
     }
-
 
     HandleUndo()
     {
@@ -134,7 +157,6 @@ export class PaintComponent implements AfterViewInit {
             this.StartDrawing(event);
         }
     }
-
 
     ChangeColor(color) {
 
@@ -165,6 +187,29 @@ export class PaintComponent implements AfterViewInit {
         }
         else if (this.type == 1) {
             this.TriggerEraser();
+        }
+    }
+
+    @HostListener('window:keydown',['$event']) 
+    HandleKeyDown(e) {
+        if(e.key === 'Delete' && this.selectedTextbox)
+        {
+            this.DeleteSelectedTextbox();
+        }
+    }
+
+
+    DeleteSelectedTextbox()
+    {
+        if(this.selectedTextbox)
+        {
+            const index = this.textBoxComponents.indexOf(this.selectedTextbox);
+            if(index > -1)
+            {
+                this.textBoxComponents.splice(index,1);
+                this.selectedTextbox.destroy();
+                this.selectedTextbox = null;
+            }
         }
     }
 }
