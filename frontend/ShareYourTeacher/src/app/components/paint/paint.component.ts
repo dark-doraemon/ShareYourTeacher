@@ -144,6 +144,7 @@ export class PaintComponent implements AfterViewInit {
     TriggerEraser() {
         this.type = 1;
         this.myCanvas.nativeElement.style.cursor = `url(https://img.icons8.com/?size=${this.cursorSize}&id=8181&format=png&color=000000) 0 ${this.cursorSize}, auto`
+        this.ChangeColor('#eaeaea');
     }
 
     TriggerPen() {
