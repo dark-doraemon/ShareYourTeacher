@@ -172,4 +172,10 @@ export class TextboxComponent implements AfterViewInit {
     {
         this.focusEvent.emit(this);
     }
+
+    isBlur = false;
+    onBlur()
+    {
+        this.isBlur= true;
+    }
 }

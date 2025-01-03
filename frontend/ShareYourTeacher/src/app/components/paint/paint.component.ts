@@ -23,6 +23,7 @@ export class PaintComponent implements AfterViewInit{
     isMouseHolding = false;
     canvasStates = [];
     canvasStateIndex = -1;
+    isCanvasFocus : boolean = false;
     constructor(private renderer2: Renderer2) {
 
     }
@@ -48,13 +49,22 @@ export class PaintComponent implements AfterViewInit{
 
     }
 
+    SetCanvasFocus(isfocused)
+    {
+        this.isCanvasFocus = isfocused
+        console.log(isfocused);
+        if(isfocused)
+        {
+            this.myCanvasNative.focus();
+        }
+    }
     StartDrawing(event: MouseEvent) {
         event.preventDefault();
         this.isDrawing = true;
         this.context.beginPath();
         this.context.moveTo(event.offsetX, event.offsetY);
-        console.log(event.offsetX, event.offsetY);
     }
+
 
     Draw(event: MouseEvent) {
         event.preventDefault();
@@ -100,8 +110,8 @@ export class PaintComponent implements AfterViewInit{
     }
 
     @HostListener('window:keydown', ['$event'])
-    KeyDownUndo(event: KeyboardEvent) {
-        if ((event.ctrlKey && event.key === 'Z') ) {
+    HandleWindowKeyDown(event: KeyboardEvent) {
+        if ((event.ctrlKey && event.key == 'z') ) {
             this.HandleUndo();
         }
         else if(event.key === 'DELETE')
@@ -124,7 +134,7 @@ export class PaintComponent implements AfterViewInit{
 
     onTextboxFocus(textboxRef: ComponentRef<TextboxComponent>) {
         this.selectedTextbox = textboxRef;
-        // console.log('Selected textbox:', textboxRef.instance); 
+        // console.log('Selected textbox:', textboxRef.instance);` 
     }
 
     ClickUndo(event)
@@ -190,13 +200,6 @@ export class PaintComponent implements AfterViewInit{
         }
     }
 
-    @HostListener('window:keydown',['$event']) 
-    HandleKeyDown(e) {
-        if(e.key === 'Delete' && this.selectedTextbox)
-        {
-            this.DeleteSelectedTextbox();
-        }
-    }
 
 
     DeleteSelectedTextbox()
