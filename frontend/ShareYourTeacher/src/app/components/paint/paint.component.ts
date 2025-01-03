@@ -23,7 +23,6 @@ export class PaintComponent implements AfterViewInit{
     isMouseHolding = false;
     canvasStates = [];
     canvasStateIndex = -1;
-    isCanvasFocused : boolean = false;
     isHoldingTextbox = false;
     constructor(private renderer2: Renderer2) {
 
@@ -50,14 +49,11 @@ export class PaintComponent implements AfterViewInit{
 
     }
 
-    SetCanvasFocus(isfocused)
+    SetCanvasFocus()
     {
-        this.isCanvasFocused = isfocused
-        if(isfocused)
-        {
-            this.myCanvasNative.focus();
-        }
+        this.myCanvasNative.focus();
     }
+
     StartDrawing(event: MouseEvent) {
         event.preventDefault();
         this.isDrawing = true;
@@ -113,11 +109,8 @@ export class PaintComponent implements AfterViewInit{
     HandleWindowKeyDown(event: KeyboardEvent) {
         console.log(event.key);
         if ((event.ctrlKey && event.key == 'z') ) {
-            if(this.isCanvasFocused)
-            {
-                this.HandleUndo();
-            }
             event.preventDefault();
+            this.HandleUndo();
         }
         else if(event.key === 'Delete')
         {
@@ -125,13 +118,11 @@ export class PaintComponent implements AfterViewInit{
         }
     }
 
-
     CreateTextBox()
     {
         const newTextbox = this.container.createComponent(TextboxComponent);
         
         newTextbox.instance.focusEvent.subscribe((textbox: TextboxComponent) =>{
-            this.isCanvasFocused = false;
             this.onTextboxFocus(newTextbox);
         });
         
@@ -155,7 +146,7 @@ export class PaintComponent implements AfterViewInit{
     HandleUndo()
     {
         if (this.canvasStateIndex <= 0) {
-            this.ClearCanvas();
+            this.ClearCanvas(true);
         }
         else {
             this.canvasStateIndex -= 1;
@@ -163,12 +154,21 @@ export class PaintComponent implements AfterViewInit{
             this.context.putImageData(this.canvasStates[this.canvasStateIndex], 0, 0);
         }
     }
-    ClearCanvas() {
+
+    ClearCanvas(textboxPreservation : boolean) {
         this.context.fillStyle = '#eaeaea';
         this.context.clearRect(0, 0, this.myCanvasNative.width, this.myCanvasNative.height);
         this.context.fillRect(0, 0, this.myCanvasNative.width, this.myCanvasNative.height);
         this.canvasStates = [];
         this.canvasStateIndex = -1;
+        
+        
+        if(!textboxPreservation)
+        {
+            this.textBoxComponents.forEach(textbox =>{
+                textbox.destroy();
+            }); 
+        }
     }
 
     MoveToCanvas(event: MouseEvent) {
@@ -185,6 +185,7 @@ export class PaintComponent implements AfterViewInit{
     TriggerEraser() {
         this.type = 1;
         this.myCanvas.nativeElement.style.cursor = `url(https://img.icons8.com/?size=${this.cursorSize}&id=8181&format=png&color=000000) 0 ${this.cursorSize}, auto`
+        this.ChangeColor('#eaeaea');
     }
 
     TriggerPen() {
@@ -208,8 +209,6 @@ export class PaintComponent implements AfterViewInit{
             this.TriggerEraser();
         }
     }
-
-
 
     DeleteSelectedTextbox()
     {

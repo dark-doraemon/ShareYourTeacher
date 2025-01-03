@@ -33,11 +33,18 @@
                     (input)="ChangePenSize($event)"> {{penSize}}
             </div>
             <div class="row mt-3">
-                <div class="col-auto">
-                    <button id="undoCanvas" class="btn btn-primary me-2" (click)="ClickUndo($event)">Undo
+                <div class="col-md-4">
+                    <button id="undoCanvas" class="btn btn-primary" (click)="ClickUndo($event)">Undo
                         <img src="https://img.icons8.com/?size=25&id=QXETd5g3MDpT&format=png&color=000000" />
                     </button>
-                    <button class="btn btn-danger" (click)="ClearCanvas()">Clear
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-danger" (click)="ClearCanvas(false)">Clear
+                        <img src="https://img.icons8.com/?size=25&id=j2dJjJUSwDCV&format=png&color=000000" />
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-danger" (click)="ClearCanvas(true)" style="font-size: 55%;">Clear(keep textbox) 
                         <img src="https://img.icons8.com/?size=25&id=j2dJjJUSwDCV&format=png&color=000000" />
                     </button>
                 </div>
@@ -68,7 +75,7 @@
             <ng-container #textboxContainer></ng-container>
             <canvas class="myCanvas" #canvas [width]="500" [height]="500"
                 tabindex="0"
-                (click)="SetCanvasFocus(true)"
+                (click)="SetCanvasFocus()"
             ></canvas>
         </div>
     </div>
