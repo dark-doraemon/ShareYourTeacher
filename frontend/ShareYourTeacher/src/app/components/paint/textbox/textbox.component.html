@@ -12,7 +12,7 @@
         <div (mousedown)="startResize($event, ['top','right'], 'xy')" class="resizer top-right"></div>
         <div (mousedown)="startResize($event, ['top','left'], 'xy')" class="resizer top-left"></div>
         <div (mousedown)="startResize($event, ['bottom','left'], 'xy')" class="resizer bottom-left"></div>
-        <div #resizeCorner (mousedown)="startResize($event, ['bottom','right'], 'xy')" class="resizer bottom-right">
-        </div>
+        <div #resizeCorner (mousedown)="startResize($event, ['bottom','right'], 'xy')" class="resizer bottom-right"></div>
+        <div class="resizer deleteButton" (click)="DeleteTextbox()">x</div>
     </div>
 </div>

@@ -164,11 +164,13 @@ export class TextboxComponent implements AfterViewInit {
             }
 
             this.lastSize = { ...this.size };
+            this.isDraggingTextbox.emit(true);
         };
 
         const finishResize = (e) => {
             this._document.removeEventListener('mousemove', duringResize);
             this._document.removeEventListener('mouseup', finishResize);
+            this.isDraggingTextbox.emit(false);
         };
 
         this._document.addEventListener('mousemove', duringResize);
@@ -179,6 +181,13 @@ export class TextboxComponent implements AfterViewInit {
 
     onFocus() {
         this.focusEvent.emit(this);
+    }
+
+
+    @Output() deleteEvent = new EventEmitter<TextboxComponent>();
+    DeleteTextbox()
+    {
+        this.deleteEvent.emit(this);
     }
 
 

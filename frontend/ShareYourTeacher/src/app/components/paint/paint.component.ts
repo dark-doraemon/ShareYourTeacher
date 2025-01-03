@@ -127,6 +127,11 @@ export class PaintComponent implements AfterViewInit {
             this.isHoldingTextbox = value;
         });
 
+        newTextbox.instance.deleteEvent.subscribe(textbox =>{
+            this.onTextboxFocus(newTextbox);
+            this.DeleteSelectedTextbox();
+        });
+
         this.textBoxComponents.push(newTextbox)
     }
 

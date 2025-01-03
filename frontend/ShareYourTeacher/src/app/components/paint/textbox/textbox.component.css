@@ -104,6 +104,19 @@ textarea {
     cursor: nwse-resize;
 }
 
+.resizers .resizer.deleteButton {
+    display: flex;
+    border-radius: 50%;
+    width: 11px;
+    height: 11px;
+    background-color: red;
+    right: -15px;
+    top: -15px;
+    justify-content: center;
+    align-items:center;
+    font-size: 10px;
+}
+
 
 .blink-color {
     animation: blink-color-animation 0.5s infinite;
@@ -113,9 +126,11 @@ textarea {
     0% {
         background-color: violet;
     }
+
     50% {
         background-color: pink;
     }
+
     100% {
         background-color: violet;
     }
