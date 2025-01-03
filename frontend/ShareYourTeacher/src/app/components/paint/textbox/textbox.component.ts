@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Output, Renderer2, ViewChild } from '@angular/core';
 import { ResizeAnchorType, ResizeDirectionType } from './resizertype';
 
 @Component({
@@ -31,7 +31,7 @@ export class TextboxComponent implements AfterViewInit {
 
     @Output() isDraggingTextbox = new EventEmitter<boolean>();
 
-    constructor(@Inject(DOCUMENT) private _document: Document,
+    constructor(@Inject(DOCUMENT) private _document: Document, private renderer2: Renderer2,
         private _el: ElementRef) { }
     ngAfterViewInit(): void {
         this._document.addEventListener('click', (e) => {
@@ -42,6 +42,11 @@ export class TextboxComponent implements AfterViewInit {
                 this.textarea.nativeElement.style.border = 'none';
             }
         });
+        this.renderer2.addClass(this.wrapperRef.nativeElement, 'blink-color');
+
+        setTimeout(() => {
+            this.renderer2.removeClass(this.wrapperRef.nativeElement, 'blink-color');
+        }, 1500)
 
     }
 
@@ -68,7 +73,7 @@ export class TextboxComponent implements AfterViewInit {
         document.body.appendChild(offscreenDiv);
 
 
-        let newWidth = Math.max(offscreenDiv.offsetWidth , this.minSize.w);
+        let newWidth = Math.max(offscreenDiv.offsetWidth, this.minSize.w);
         let newHeight = Math.max(offscreenDiv.offsetHeight + 15, this.minSize.h);
         // const newWidth = offscreenDiv.offsetWidth;
         // const newHeight = offscreenDiv.offsetHeight;
@@ -172,10 +177,9 @@ export class TextboxComponent implements AfterViewInit {
 
     @Output() focusEvent = new EventEmitter<TextboxComponent>();
 
-    onFocus()
-    {
+    onFocus() {
         this.focusEvent.emit(this);
     }
 
-   
+
 }

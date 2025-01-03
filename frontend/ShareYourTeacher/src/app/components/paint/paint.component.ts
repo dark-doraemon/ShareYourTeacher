@@ -8,13 +8,13 @@ import { TextboxComponent } from "./textbox/textbox.component";
     templateUrl: './paint.component.html',
     styleUrl: './paint.component.css'
 })
-export class PaintComponent implements AfterViewInit{
+export class PaintComponent implements AfterViewInit {
     @ViewChild('canvas') myCanvas!: ElementRef;
     myCanvasNative: HTMLCanvasElement;
     draw_color: string = '#000000'; // Giá trị mặc định
-    @ViewChild('textboxContainer',{read:ViewContainerRef}) container!: ViewContainerRef;
-    textBoxComponents : ComponentRef<TextboxComponent>[] = [];
-    selectedTextbox : ComponentRef<TextboxComponent> | null = null;
+    @ViewChild('textboxContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
+    textBoxComponents: ComponentRef<TextboxComponent>[] = [];
+    selectedTextbox: ComponentRef<TextboxComponent> | null = null;
     penSize: number = 5;
     cursorSize: number = 20;
     context: CanvasRenderingContext2D = null;
@@ -49,8 +49,7 @@ export class PaintComponent implements AfterViewInit{
 
     }
 
-    SetCanvasFocus()
-    {
+    SetCanvasFocus() {
         this.myCanvasNative.focus();
     }
 
@@ -76,8 +75,7 @@ export class PaintComponent implements AfterViewInit{
     }
 
     StopDrawing(event) {
-        if(!this.isDrawing)
-        {
+        if (!this.isDrawing) {
             return;
         }
         event.preventDefault();
@@ -99,7 +97,7 @@ export class PaintComponent implements AfterViewInit{
 
     @HostListener('window:mouseup', ['$event'])
     windowMouseUp(event) {
-        if (event.button === 0 ) {
+        if (event.button === 0) {
             this.isMouseHolding = false;
             this.StopDrawing(event);
         }
@@ -108,28 +106,27 @@ export class PaintComponent implements AfterViewInit{
     @HostListener('window:keydown', ['$event'])
     HandleWindowKeyDown(event: KeyboardEvent) {
         console.log(event.key);
-        if ((event.ctrlKey && event.key == 'z') ) {
+        if ((event.ctrlKey && event.key == 'z')) {
             event.preventDefault();
             this.HandleUndo();
         }
-        else if(event.key === 'Delete')
-        {
+        else if (event.key === 'Delete') {
             this.DeleteSelectedTextbox();
         }
     }
 
-    CreateTextBox()
-    {
+    CreateTextBox() {
         const newTextbox = this.container.createComponent(TextboxComponent);
-        
-        newTextbox.instance.focusEvent.subscribe((textbox: TextboxComponent) =>{
+       
+
+        newTextbox.instance.focusEvent.subscribe((textbox: TextboxComponent) => {
             this.onTextboxFocus(newTextbox);
         });
-        
-        newTextbox.instance.isDraggingTextbox.subscribe(value =>{
+
+        newTextbox.instance.isDraggingTextbox.subscribe(value => {
             this.isHoldingTextbox = value;
         });
-       
+
         this.textBoxComponents.push(newTextbox)
     }
 
@@ -137,14 +134,12 @@ export class PaintComponent implements AfterViewInit{
         this.selectedTextbox = textboxRef;
     }
 
-    ClickUndo(event)
-    {
+    ClickUndo(event) {
         event.preventDefault();
         this.HandleUndo()
     }
 
-    HandleUndo()
-    {
+    HandleUndo() {
         if (this.canvasStateIndex <= 0) {
             this.ClearCanvas(true);
         }
@@ -155,19 +150,18 @@ export class PaintComponent implements AfterViewInit{
         }
     }
 
-    ClearCanvas(textboxPreservation : boolean) {
+    ClearCanvas(textboxPreservation: boolean) {
         this.context.fillStyle = '#eaeaea';
         this.context.clearRect(0, 0, this.myCanvasNative.width, this.myCanvasNative.height);
         this.context.fillRect(0, 0, this.myCanvasNative.width, this.myCanvasNative.height);
         this.canvasStates = [];
         this.canvasStateIndex = -1;
-        
-        
-        if(!textboxPreservation)
-        {
-            this.textBoxComponents.forEach(textbox =>{
+
+
+        if (!textboxPreservation) {
+            this.textBoxComponents.forEach(textbox => {
                 textbox.destroy();
-            }); 
+            });
         }
     }
 
@@ -210,14 +204,11 @@ export class PaintComponent implements AfterViewInit{
         }
     }
 
-    DeleteSelectedTextbox()
-    {
-        if(this.selectedTextbox)
-        {
+    DeleteSelectedTextbox() {
+        if (this.selectedTextbox) {
             const index = this.textBoxComponents.indexOf(this.selectedTextbox);
-            if(index > -1)
-            {
-                this.textBoxComponents.splice(index,1);
+            if (index > -1) {
+                this.textBoxComponents.splice(index, 1);
                 this.selectedTextbox.destroy();
                 this.selectedTextbox = null;
             }

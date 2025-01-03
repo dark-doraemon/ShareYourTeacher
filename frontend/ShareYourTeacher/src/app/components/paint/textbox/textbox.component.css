@@ -103,3 +103,20 @@ textarea {
     top: -3px;
     cursor: nwse-resize;
 }
+
+
+.blink-color {
+    animation: blink-color-animation 0.5s infinite;
+}
+
+@keyframes blink-color-animation {
+    0% {
+        background-color: violet;
+    }
+    50% {
+        background-color: pink;
+    }
+    100% {
+        background-color: violet;
+    }
+}
