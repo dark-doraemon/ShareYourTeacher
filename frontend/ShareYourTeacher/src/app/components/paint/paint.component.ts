@@ -23,7 +23,8 @@ export class PaintComponent implements AfterViewInit{
     isMouseHolding = false;
     canvasStates = [];
     canvasStateIndex = -1;
-    isCanvasFocus : boolean = false;
+    isCanvasFocused : boolean = false;
+    isHoldingTextbox = false;
     constructor(private renderer2: Renderer2) {
 
     }
@@ -51,8 +52,7 @@ export class PaintComponent implements AfterViewInit{
 
     SetCanvasFocus(isfocused)
     {
-        this.isCanvasFocus = isfocused
-        console.log(isfocused);
+        this.isCanvasFocused = isfocused
         if(isfocused)
         {
             this.myCanvasNative.focus();
@@ -111,10 +111,15 @@ export class PaintComponent implements AfterViewInit{
 
     @HostListener('window:keydown', ['$event'])
     HandleWindowKeyDown(event: KeyboardEvent) {
+        console.log(event.key);
         if ((event.ctrlKey && event.key == 'z') ) {
-            this.HandleUndo();
+            if(this.isCanvasFocused)
+            {
+                this.HandleUndo();
+            }
+            event.preventDefault();
         }
-        else if(event.key === 'DELETE')
+        else if(event.key === 'Delete')
         {
             this.DeleteSelectedTextbox();
         }
@@ -126,15 +131,19 @@ export class PaintComponent implements AfterViewInit{
         const newTextbox = this.container.createComponent(TextboxComponent);
         
         newTextbox.instance.focusEvent.subscribe((textbox: TextboxComponent) =>{
+            this.isCanvasFocused = false;
             this.onTextboxFocus(newTextbox);
         });
-
+        
+        newTextbox.instance.isDraggingTextbox.subscribe(value =>{
+            this.isHoldingTextbox = value;
+        });
+       
         this.textBoxComponents.push(newTextbox)
     }
 
     onTextboxFocus(textboxRef: ComponentRef<TextboxComponent>) {
         this.selectedTextbox = textboxRef;
-        // console.log('Selected textbox:', textboxRef.instance);` 
     }
 
     ClickUndo(event)
@@ -163,7 +172,7 @@ export class PaintComponent implements AfterViewInit{
     }
 
     MoveToCanvas(event: MouseEvent) {
-        if (this.isMouseHolding) {
+        if (this.isMouseHolding && this.isHoldingTextbox == false) {
             this.StartDrawing(event);
         }
     }

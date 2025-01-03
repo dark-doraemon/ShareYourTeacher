@@ -12,6 +12,10 @@
     cursor: url('https://img.icons8.com/?size=20&id=22231&format=png&color=000000') 0 20, auto;
 }
 
+*:focus {
+    outline: none;
+}
+
 .color-box {
     width: 100%;
     /* Chiều rộng tự động theo cột */

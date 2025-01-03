@@ -29,6 +29,8 @@ export class TextboxComponent implements AfterViewInit {
 
     minSize: { w: number, h: number } = { w: 150, h: 50 };
 
+    @Output() isDraggingTextbox = new EventEmitter<boolean>();
+
     constructor(@Inject(DOCUMENT) private _document: Document,
         private _el: ElementRef) { }
     ngAfterViewInit(): void {
@@ -93,11 +95,13 @@ export class TextboxComponent implements AfterViewInit {
             const dy = e.clientY - mouseY;
             this.position = { x: positionX + dx, y: positionY + dy };
             this.lastPosition = { ...this.position };
+            this.isDraggingTextbox.emit(true);
         };
 
         const finishDrag = (e) => {
             this._document.removeEventListener('mousemove', duringDrag);
             this._document.removeEventListener('mouseup', finishDrag);
+            this.isDraggingTextbox.emit(false);
         };
 
         this._document.addEventListener('mousemove', duringDrag);
@@ -173,9 +177,5 @@ export class TextboxComponent implements AfterViewInit {
         this.focusEvent.emit(this);
     }
 
-    isBlur = false;
-    onBlur()
-    {
-        this.isBlur= true;
-    }
+   
 }
