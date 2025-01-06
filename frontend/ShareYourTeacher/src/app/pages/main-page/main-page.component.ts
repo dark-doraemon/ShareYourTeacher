@@ -17,6 +17,7 @@ export class MainPageComponent {
 
     navigateTo(route)
     {
+        console.log(route);
         this.router.navigate([route]);
     }
 }

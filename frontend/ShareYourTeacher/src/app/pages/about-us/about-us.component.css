@@ -1,0 +1,144 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.about {
+    width: 100%;
+    min-height: 96vh;
+    padding: 78px 0px;
+    background-color: #191919;
+}
+
+
+
+.about img {
+    height: auto;
+    width: 420px;
+}
+
+.about-text {
+    width: 550px;
+}
+
+.main {
+    width: 1130px;
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.about-text h1 {
+    color: white;
+    font-size: 80px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.about-text h5 {
+    color: white;
+    font-size: 25px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+
+}
+
+.about-text h5 span {
+    color: #f9004d;
+}
+
+.about-text p {
+    color: #fcfc;
+    letter-spacing: 1px;
+    line-height: 28px;
+    font-size: 18px;
+    margin-bottom: 45px;
+}
+
+
+
+/* Media Queries */
+
+/* Màn hình nhỏ hơn 1024px (Laptop, Tablet) */
+@media (max-width: 1024px) {
+    .about-text {
+        width: 80%;
+        /* Thu nhỏ chiều rộng văn bản */
+    }
+
+    .about img {
+        width: 300px;
+        /* Thu nhỏ kích thước hình ảnh */
+    }
+
+    .main {
+        flex-direction: column;
+        /* Chuyển layout từ ngang sang dọc */
+        text-align: center;
+    }
+
+    .about-text h1 {
+        font-size: 50px;
+        /* Giảm kích thước tiêu đề */
+    }
+
+    .about-text h5 {
+        font-size: 20px;
+    }
+
+    .about-text p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
+/* Màn hình nhỏ hơn 768px (Tablet và điện thoại lớn) */
+@media (max-width: 768px) {
+    .about img {
+        width: 250px;
+        /* Tiếp tục thu nhỏ hình ảnh */
+    }
+
+    .about-text {
+        width: 90%;
+        /* Văn bản chiếm toàn màn hình */
+    }
+
+    .about-text h1 {
+        font-size: 40px;
+        /* Tiêu đề nhỏ hơn */
+    }
+}
+
+/* Màn hình nhỏ hơn 480px (Điện thoại di động) */
+@media (max-width: 480px) {
+    .about {
+        padding: 50px 10px;
+        /* Thu gọn padding */
+    }
+
+    .about-text h1 {
+        font-size: 30px;
+        /* Tiêu đề nhỏ hơn */
+    }
+
+    .about-text h5 {
+        font-size: 18px;
+    }
+
+    .about-text p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .main {
+        justify-content: center;
+        /* Canh giữa tất cả nội dung */
+    }
+}
