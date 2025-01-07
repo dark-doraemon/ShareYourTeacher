@@ -20,7 +20,6 @@ export class MainPageComponent implements AfterViewInit {
         private elementRef:ElementRef 
     ) {}
     ngAfterViewInit(): void {
-        console.log(this.elementRef.nativeElement.style.height)
     }
 
     navigateTo(route) {

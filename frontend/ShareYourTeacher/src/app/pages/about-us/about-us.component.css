@@ -16,7 +16,9 @@
     background-color: #191919;
 }
 
-
+p {
+    text-align: justify;
+}
 
 .about img {
     height: auto;
@@ -145,4 +147,8 @@
         justify-content: center;
         /* Canh giữa tất cả nội dung */
     }
+}
+
+@media(max-width: 260px){
+    
 }

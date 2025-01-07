@@ -88,14 +88,25 @@
     display: none;
     position: fixed;
     top: 0;
-    right: 0;
+    /* right: 0; */
+    right: -250px;
     height: 100vh;
     width: 250px;
     z-index: 999;
     background-color: whitesmoke;
+    /* background-color: transparent; */
     /* background-color: rgba(255,255,255,0.2); */
-    /* backdrop-filter: blur(2px); */
+    /* backdrop-filter: blur(30px); */
     box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease-in-out;
+}
+
+.sidebar.open {
+    transform: translateX(-250px); /* Di chuyển vào màn hình */
+}
+
+.sidebar.closed {
+    transform: translateX(0); /* Di chuyển ra ngoài màn hình */
 }
 
 .sidebar li {
@@ -124,4 +135,11 @@
         display: block;
     }
 
+}
+
+@media(max-width: 350px){
+    .sidebar{
+        width: 100%;
+        height: 100%;
+    }
 }

@@ -10,13 +10,15 @@
                 <li class="hideOnMobile" (click)="navigateTo('')"><a>Contact</a></li>
                 <li class="hideOnMobile" (click)="navigateTo('')"><a>Report</a></li>
                 <li class="menu-button" (click)="showSideBar()">
-                    <img src="https://img.icons8.com/?size=30&id=120374&format=png&color=000000" />
+                    <img class="img-menu-button" src="https://img.icons8.com/?size=30&id=120374&format=png&color=000000" />
                 </li>
             </ul>
+            
 
-            <ul #sidebar class="sidebar">
-                <li (click)="navigateTo('')">
-                    <img (click)="closeSideBar()" src="https://img.icons8.com/?size=50&id=46&format=png&color=000000">
+            <!-- áp dụng class open nếu biến isSidebarOpen = true -->
+            <ul #sidebar class="sidebar" [class.open]="isSidebarOpen" [class.closed]="!isSidebarOpen">
+                <li>
+                    <img  (click)="closeSideBar()" src="https://img.icons8.com/?size=30&id=46&format=png&color=000000">
                 </li>
                 <li (click)="navigateTo('')"><a>Home</a></li>
                 <li (click)="navigateTo('about-us')"><a>About</a></li>
