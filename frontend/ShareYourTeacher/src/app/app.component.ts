@@ -5,10 +5,11 @@ import { CreateRoomComponent } from "./components/PageComponent/main-page/create
 import { HeaderComponent } from "./components/header/header.component";
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, MainPageComponent, CreateRoomComponent, HeaderComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, MainPageComponent, CreateRoomComponent, HeaderComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
+    
 })
 export class AppComponent {
     title = 'ShareYourTeacher';

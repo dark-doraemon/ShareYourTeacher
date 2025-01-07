@@ -6,8 +6,10 @@
 
 
 .about {
-    width: 100%;
-    min-height: 96vh;
+    display: flex;
+    /* height: 100%; */
+    /* width: 100%; */
+    /* min-height: 100%; */
     padding: 78px 0px;
     background-color: #191919;
 }

@@ -4,3 +4,15 @@
     list-style: none;
     text-decoration: none;
 }
+
+.mainApp {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.router-outlet-wrapper {
+    display: flex;
+    flex: 1
+}
+
