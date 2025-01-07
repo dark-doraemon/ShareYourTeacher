@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Route, Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+    @ViewChild('sidebar') sidebarRef : ElementRef;
     constructor(private router: Router)
     {
 
@@ -16,5 +17,16 @@ export class HeaderComponent {
     navigateTo(route)
     {
         this.router.navigate([route]);
+    }
+
+
+    showSideBar()
+    {
+        this.sidebarRef.nativeElement.style.display = 'block'
+    }
+
+    closeSideBar()
+    {
+        this.sidebarRef.nativeElement.style.display = 'none';
     }
 }

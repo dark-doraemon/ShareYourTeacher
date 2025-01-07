@@ -6,7 +6,7 @@
 }
 
 .header {
-    width: 100%;
+    width: 100vw;
     height: 40px;
     display: block;
     background-color: #101010;
@@ -14,7 +14,7 @@
 
 
 .inner_header {
-    width: 1000px;
+    width: 90%;
     height: 100%;
     display: block;
     margin: 0 auto;
@@ -49,21 +49,79 @@
     height: 100%;
 }
 
-.navigation a {
+.navigation li {
     height: 100%;
     display: table;
     float: left;
-    padding: 0px 20px; /*padding 0px top và bottom, padding 20px left và right*/
+    padding: 0px 20px;
+    /*padding 0px top và bottom, padding 20px left và right*/
 }
 
-.navigation a:last-child{
+.navigation li:last-child {
     padding-right: 0;
 }
 
-.navigation a li {
+.navigation li a {
     display: table-cell;
     vertical-align: middle;
     height: 100%;
     color: white;
     font-size: 16px;
+}
+
+.navigation li img {
+    background-color: white;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    color: white;
+    font-size: 16px;
+}
+
+.navigation li:not(:has(img)):hover {
+    background-color: blue;
+    border-radius: 50px;
+}
+
+
+.sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: whitesmoke;
+    /* background-color: rgba(255,255,255,0.2); */
+    /* backdrop-filter: blur(2px); */
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar li {
+    padding: 20px 20px;
+    width: 100%;
+}
+
+
+
+.sidebar li:not(:has(img)):hover {
+    background-color: lightblue;
+    color: black;
+}
+
+
+.navigation li.menu-button {
+    display: none;
+}
+
+@media(max-width: 650px) {
+    .hideOnMobile {
+        display: none !important;
+    }
+
+    .navigation li.menu-button {
+        display: block;
+    }
+
 }
