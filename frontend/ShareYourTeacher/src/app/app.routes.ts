@@ -3,6 +3,7 @@ import { CreateRoomComponent } from './components/PageComponent/main-page/create
 import { JoinRoomComponent } from './components/PageComponent/main-page/join-room/join-room.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 
 export const routes: Routes = [
     {
@@ -16,6 +17,9 @@ export const routes: Routes = [
     },
     {
         path: 'join-room',component: JoinRoomComponent
+    },
+    {
+        path : 'portfolio', component: PortfolioComponent
     }
 
 ];
