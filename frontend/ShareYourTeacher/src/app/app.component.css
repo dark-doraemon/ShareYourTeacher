@@ -13,6 +13,8 @@
 
 .router-outlet-wrapper {
     display: flex;
-    flex: 1
+    flex: 1;
+    overflow-x: hidden;
 }
+
 

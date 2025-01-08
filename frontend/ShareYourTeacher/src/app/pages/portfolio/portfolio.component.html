@@ -1,28 +1,177 @@
 <header class="header">
-    <a href="#" class="logo">
+    <a (click)="scrollToSection(about)" class="logo">
         <span>Minh Tuan</span>
     </a>
 
     <ul class="nav-links">
         <li>
-            <a href="#about">About</a>
+            <a (click)="scrollToSection(about)">About</a>
         </li>
 
         <li>
-            <a href="#experience">Experience</a>
+            <a (click)="scrollToSection(experience)">Experience</a>
         </li>
 
         <li>
-            <a href="#project">Projects</a>
+            <a (click)="scrollToSection(projects)">Projects</a>
         </li>
 
         <li>
-            <a href="#contact">About</a>
+            <a (click)="scrollToSection(contact)">Contact</a>
         </li>
     </ul>
     <i class="fa-solid fa-bars" id="menu-icon"></i>
-    <!-- <img src="https://img.icons8.com/?size=20&id=120374&format=png&color=000000"> -->
 
-    <button class="visit-btn">Visit github</button>
+    <a class="visit-btn" href="https://github.com/dark-doraemon" target="_blank">Visit github</a>
 
 </header>
+
+<section #about id="about" class="about">
+    <div class="about-container">
+        <img src="https://avatars.githubusercontent.com/u/92509424?v=4" alt="">
+
+        <div class="info-box">
+            <div class="text">
+                <h3>Xin chào, tôi tên là </h3>
+                <h1>Tuấn</h1>
+                <span>Backend Developer</span>
+            </div>
+
+            <div class="btn-group">
+                <div class="customBtn">Download CV</div>
+                <!-- <div class="customBtn">Contact</div> -->
+            </div>
+
+
+            <div class="socials">
+                <a href="https://github.com/dark-doraemon" target="_blank">
+                    <i class="fa-brands fa-github" style="color:black ;"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/tuandinhminh/" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section #experience id="experience" class="experience">
+    <div class="experience" id="experience">
+        <h2 class="section-title">
+            Experience
+        </h2>
+
+        <div class="experience-info">
+            <div class="grid">
+                <div class="grid-card">
+                    <div class="experience-text">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Backend developer intern</span>
+                        <h3>3 months (8/2024 - 11/2024)</h3>
+                        <p>
+                            Viết API và unit test cho các module của dự án Nutri tại Kyanon Digital
+                        </p>
+                    </div>
+
+                    <div class="company-logo">
+                        <img src="https://kyanon.digital/wp-content/uploads/2021/11/avatar-kyanon.jpg" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section #projects id="projects" class="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+        <div class="project-card">
+            <img src="./assets/p1.png" alt="">
+            <h3>Quản lý khách sạn</h3>
+            <p>
+
+            </p>
+            <div class="btn-group">
+                <a class="customBtn" href="https://www.youtube.com/watch?v=79xL04T3RMM" target="_blank">Demo</a>
+                <a class="customBtn" href="https://github.com/dark-doraemon/HotelManagementWithASP.NET2"
+                    target="_blank">GitHub Repo</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="./assets/p2.png" alt="">
+            <h3>Ecommerce Web</h3>
+            <p>
+            </p>
+
+            <div class="btn-group">
+                <a class="customBtn" href="https://www.youtube.com/watch?v=B-_lrsHDiqY" target="_blank">Demo</a>
+                <a class="customBtn" href="https://github.com/dark-doraemon/Ecommerce-official-2" target="_blank">GitHub
+                    Repo</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="" alt="">
+            <h3>Draw web</h3>
+            <p>
+            </p>
+
+            <div class="btn-group">
+                <a class="customBtn">Demo</a>
+                <a class="customBtn">GitHub Repo</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section #contact id="contact" class="contact">
+    <!-- <div class="input-box">
+        <h2 class="section-title">Contact me</h2>
+
+        <div class="input">
+            <input type="text" placeholder="example@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+        </div>
+
+        <div class="customBtn">Submit</div>
+    </div> -->
+    <div class="list-contact">
+        <div class="phone">
+            <i class="fa-solid fa-phone"></i>
+            <div>0812066119</div>
+        </div>
+        <div class="gmail">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <div>tuandinhbi75&#64;gmail.com</div>
+        </div>
+        <div class="linkedin ">
+            <i class="fa-brands fa-linkedin"></i>
+            <div>
+                <a href="https://www.linkedin.com/in/tuandinhminh/">Tuan Dinh Minh</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <ul>
+        <li>
+            <a>About</a>
+        </li>
+        <li>
+            <a>Experience</a>
+        </li>
+        <li>
+            <a>Projects</a>
+        </li>
+        <li>
+            <a>Contact</a>
+        </li>
+    </ul>
+    <p class="copyright">
+        &#169; All Rights Reserved | Minh Tuấn
+    </p>
+</footer>
