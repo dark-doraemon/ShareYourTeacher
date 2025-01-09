@@ -1,12 +1,12 @@
 <header class="header">
-    <a (click)="scrollToSection(about)" class="logo">
+    <!-- <a (click)="scrollToSection(about)" class="logo">
         <span>Minh Tuan</span>
-    </a>
+    </a> -->
 
     <ul class="nav-links">
-        <li>
+        <!-- <li>
             <a (click)="scrollToSection(about)">About</a>
-        </li>
+        </li> -->
 
         <li>
             <a (click)="scrollToSection(skills)">Skills</a>
@@ -30,7 +30,7 @@
 
 </header>
 
-<section #about id="about" class="about">
+<!-- <section #about id="about" class="about">
     <div class="about-container">
         <img src="https://avatars.githubusercontent.com/u/92509424?v=4" alt="">
 
@@ -38,12 +38,11 @@
             <div class="text">
                 <h3>Xin chào, tôi tên là </h3>
                 <h1>Tuấn</h1>
-                <span>Backend Developer</span>
+                <span>Software Developer</span>
             </div>
 
             <div class="btn-group">
                 <a class="customBtn" href="./assets/cv.pdf" download>Download CV</a>
-                <!-- <div class="customBtn">Contact</div> -->
             </div>
 
 
@@ -57,10 +56,28 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section #skills id="skills" class="skills">
+    <h2 class="section-title" style="margin-bottom: 0;">Skills</h2>
+    <p class="skills-describe">
+        Tôi là một software developer và có thể sử dụng nhiều ngôn ngữ lập trình và công nghệ khác nhau để tạo ra sản phẩm nhưng 
+        thế mạnh nhât của tôi vẫn là C#/.NET
+    </p>
 
+    <div class="skills-area" >
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div style="width: 50px;height: 50px;background-color: black;"></div>
+        <div class="slider"></div>
+    </div>
 </section>
 
 <section #experience id="experience" class="experience">
@@ -74,10 +91,10 @@
                 <div class="grid-card">
                     <div class="experience-text">
                         <i class="fa-solid fa-code"></i>
-                        <span>Backend developer intern</span>
+                        <span>Backed developer intern</span>
                         <h3>3 months (8/2024 - 11/2024)</h3>
                         <p>
-                            Viết API và unit test cho các module của dự án Nutri tại Kyanon Digital
+                            Viết API và unit test của các module cho dự án Nutri tại Kyanon Digital
                         </p>
                     </div>
 
@@ -168,6 +185,9 @@
     <ul>
         <li>
             <a>About</a>
+        </li>
+        <li>
+            <a>Skills</a>
         </li>
         <li>
             <a>Experience</a>

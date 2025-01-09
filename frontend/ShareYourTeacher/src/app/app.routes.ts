@@ -7,19 +7,18 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 
 export const routes: Routes = [
     {
-        path: '',component: MainPageComponent
+        path: '', component: MainPageComponent
     },
     {
-        path: 'about-us',component: AboutUsComponent
+        path: 'about-us', component: AboutUsComponent
     },
     {
-        path: 'create-room',component: CreateRoomComponent
+        path: 'create-room', component: CreateRoomComponent
     },
     {
-        path: 'join-room',component: JoinRoomComponent
+        path: 'join-room', component: JoinRoomComponent
     },
     {
-        path : 'portfolio', component: PortfolioComponent
+        path: 'portfolio', component: PortfolioComponent
     }
-
 ];
