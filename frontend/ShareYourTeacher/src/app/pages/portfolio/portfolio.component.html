@@ -9,6 +9,10 @@
         </li>
 
         <li>
+            <a (click)="scrollToSection(skills)">Skills</a>
+        </li>
+
+        <li>
             <a (click)="scrollToSection(experience)">Experience</a>
         </li>
 
@@ -38,7 +42,7 @@
             </div>
 
             <div class="btn-group">
-                <div class="customBtn">Download CV</div>
+                <a class="customBtn" href="./assets/cv.pdf" download>Download CV</a>
                 <!-- <div class="customBtn">Contact</div> -->
             </div>
 
@@ -53,6 +57,10 @@
             </div>
         </div>
     </div>
+</section>
+
+<section #skills id="skills" class="skills">
+
 </section>
 
 <section #experience id="experience" class="experience">
