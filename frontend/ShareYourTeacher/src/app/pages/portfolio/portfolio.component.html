@@ -3,28 +3,29 @@
         <span>Minh Tuan</span>
     </a>
 
-    <ul class="nav-links">
-        <li>
-            <a (click)="scrollToSection(about)">About</a>
+    <ul #navLinks class="nav-links">
+        <li (click)="scrollToSection(about)">
+            <a>About</a>
         </li>
 
-        <li>
-            <a (click)="scrollToSection(skills)">Skills</a>
+        <li (click)="scrollToSection(skills)">
+            <a>Skills</a>
         </li>
 
-        <li>
-            <a (click)="scrollToSection(experience)">Experience</a>
+        <li (click)="scrollToSection(experience)">
+            <a>Experience</a>
         </li>
 
-        <li>
-            <a (click)="scrollToSection(projects)">Projects</a>
+        <li (click)="scrollToSection(projects)">
+            <a>Projects</a>
         </li>
 
-        <li>
-            <a (click)="scrollToSection(contact)">Contact</a>
+        <li (click)="scrollToSection(contact)">
+            <a>Contact</a>
         </li>
     </ul>
-    <i class="fa-solid fa-bars" id="menu-icon"></i>
+
+    <i #menuicon class="fa-solid fa-bars" id="menu-icon"></i>
 
     <a class="visit-btn" href="https://github.com/dark-doraemon" target="_blank">Visit github</a>
 
@@ -99,7 +100,10 @@
                         <span>Backed developer intern</span>
                         <h3>3 months (8/2024 - 11/2024)</h3>
                         <p>
-                            Viết API và unit test của các module cho dự án Nutri tại Kyanon Digital
+                            Trong dự án Nutri tại Kyanon Digital,
+                            tôi đảm nhận việc phát triển API theo chuẩn RESTful cho các tính năng mới
+                            và thực hiện unit test cho các module hiện có nhằm đảm bảo cover đầy đủ các trường hợp chưa
+                            được kiểm tra.
                         </p>
                     </div>
 
@@ -158,16 +162,7 @@
 </section>
 
 <section #contact id="contact" class="contact">
-    <!-- <div class="input-box">
-        <h2 class="section-title">Contact me</h2>
-
-        <div class="input">
-            <input type="text" placeholder="example@gmail.com">
-            <i class="fa-solid fa-envelope"></i>
-        </div>
-
-        <div class="customBtn">Submit</div>
-    </div> -->
+    <h2 class="section-title">Contact</h2>
     <div class="list-contact">
         <div class="phone">
             <i class="fa-solid fa-phone"></i>
@@ -188,22 +183,27 @@
 
 <footer>
     <ul>
-        <li>
+        <li (click)="scrollToSection(about)">
             <a>About</a>
         </li>
-        <li>
+
+        <li (click)="scrollToSection(skills)">
             <a>Skills</a>
         </li>
-        <li>
+
+        <li (click)="scrollToSection(experience)">
             <a>Experience</a>
         </li>
-        <li>
+
+        <li (click)="scrollToSection(projects)">
             <a>Projects</a>
         </li>
-        <li>
+
+        <li (click)="scrollToSection(contact)">
             <a>Contact</a>
         </li>
     </ul>
+
     <p class="copyright">
         &#169; All Rights Reserved | Minh Tuấn
     </p>

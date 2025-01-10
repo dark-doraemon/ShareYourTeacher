@@ -44,7 +44,7 @@ header {
     color: white;
     padding: 0.5rem 1.5rem;
     border-radius: 333rem;
-    z-index: 1000;
+    z-index: 500;
 }
 
 
@@ -217,7 +217,6 @@ section {
     font-weight: 600;
     margin-bottom: 3rem;
 }
-
 .experience-info {
     display: flex;
     align-items: center;
@@ -260,6 +259,10 @@ section {
     flex-direction: column;
     justify-content: center;
     font-size: 1.3rem;
+}
+
+.experience-text p {
+    text-align: justify;
 }
 
 .company-logo img {
@@ -317,7 +320,7 @@ section {
 }
 
 .project-card img {
-    width: 20vw;
+    width: 90%;
     height: 20vh;
     border-radius: 1rem;
 }
@@ -418,6 +421,7 @@ footer ul li a {
 
 .contact {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -518,56 +522,6 @@ section .skills-container {
     }
 }
 
-@media (max-width: 580px) {
-    section .skills-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    section .skills-container i{
-        font-size: 2.5rem !important;
-    }
-}
-
-@media (max-width: 450px) {
-    section .skills-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    section .skills-container i{
-        font-size: 2rem !important;
-    }
-}
-
-@media (max-width: 375px) {
-    section .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-   
-    section .skills-container i{
-        font-size: 2rem !important;
-    }
-}
-
-@media (max-width: 250px) {
-    section .skills-container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-   
-    section .skills-container i{
-        font-size: 2rem !important;
-    }
-}
-
-@media (max-width: 100px) {
-    section .skills-container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    section .skills-main .skills-container {
-        padding: 0;
-    }
-    section .skills-container i{
-        font-size: 1.5rem !important;
-    }
-}
-
 
 
 section .skills-container img {
@@ -594,3 +548,155 @@ section .skills-container .slider {
     right: 1rem;
     transform: translateY(-50%);
 }
+
+@media (max-width:1280px){
+    header {
+        padding: 1rem 2rem;
+        gap: 2rem;
+    }
+
+    .about .about-container{
+        gap: 3rem;
+    }
+}
+
+@media(max-width: 768px){
+    header {
+        gap: 1rem;
+        padding: 1rem 1rem;
+    }
+    header .logo {
+        font-size: 1rem;
+    }
+    header .visit-btn{
+        display: none;
+    }
+
+    .about-container {
+        flex-direction: column;
+    }
+    .about-container img {
+        width: 50vh;
+    }
+    .grid .grid-card{
+        flex-direction: column;
+        text-align:justify;
+        align-items: center;
+    }
+}
+
+@media (max-width: 600px) {
+    header #menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        margin-top: 1rem;
+        padding: 1rem;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 2rem;
+        display: none;
+    }
+    .nav-links li {
+        padding: 1rem;
+    }
+
+    .nav-links.active {
+        display: block;
+    }
+    header {
+        padding: 1rem 5rem;
+        gap: 8rem;
+    }
+
+    header .logo{
+        font-size: 1.5rem;
+    }
+
+    .about-container img {
+        width: 50vh;
+    }
+
+    footer ul {
+        gap: 1rem;
+    }
+
+    section .skills-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    section .skills-container i{
+        font-size: 2.5rem !important;
+    }
+    
+}
+
+@media (max-width: 450px) {
+    section .skills-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    section .skills-container i{
+        font-size: 2rem !important;
+    }
+
+    .about-container img {
+        width: 40vh;
+    }
+    .section-title {
+        font-size: 3rem;
+    }
+
+    header {
+        gap: 3rem;
+    }
+
+    footer ul{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 375px) {
+    section .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+   
+    section .skills-container i{
+        font-size: 2rem !important;
+    }
+    .about-container img {
+        width: 30vh;
+    }
+
+    header {
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 250px) {
+    section .skills-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+   
+    section .skills-container i{
+        font-size: 2rem !important;
+    }
+}
+
+@media (max-width: 100px) {
+    section .skills-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    section .skills-main .skills-container {
+        padding: 0;
+    }
+    section .skills-container i{
+        font-size: 1.5rem !important;
+    }
+}
+
