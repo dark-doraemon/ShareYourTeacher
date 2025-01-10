@@ -192,7 +192,7 @@ section {
 
 .customBtn:hover {
     background-color: black;
-    color: white;
+    color: white !important;
 }
 
 .socials {
