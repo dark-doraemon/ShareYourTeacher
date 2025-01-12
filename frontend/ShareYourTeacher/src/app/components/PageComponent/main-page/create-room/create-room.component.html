@@ -6,8 +6,13 @@
                 <h2 class="text-center">Tạo phòng học</h2>
                 <form>
                     <div class="mb-3">
-                        <!-- <label for="className" class="form-label">Nhập tên phòng</label> -->
-                        <!-- <input type="text" class="form-control" id="className" placeholder="Tên phòng"> -->
+                        <label for="className" class="form-label">Nhập tên phòng</label>
+                        <input type="text" class="form-control" id="className" placeholder="Tên phòng">
+                        
+                        <input #checkbox type="checkbox" class="me-1 mt-3" (click)="checkCheckboxValue($event)" >
+                        <label for="className" class="form-label">Không giới hạng thành viên</label>
+                        <input *ngIf="!isUnlimitedMember" #memberQuantity type="text" class="form-control" id="className" placeholder="Số lượng thành viên">
+                       
                     </div>
                     <button class="btn btn-primary mt-3 d-flex mx-auto">Tao ngay</button>
                 </form>

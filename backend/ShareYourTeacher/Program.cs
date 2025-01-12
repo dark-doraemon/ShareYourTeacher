@@ -1,5 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
 using ShareYourTeacher.API.SingalR;
+using ShareYourTeacher.Models;
 
 namespace ShareYourTeacher;
 
@@ -11,7 +13,14 @@ public class Program
 
         builder.Services.AddControllers();
 
-        builder.Services.AddSignalR(options => {
+        //add database connection 
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionStrings"));
+        });
+
+        builder.Services.AddSignalR(options =>
+        {
             options.MaximumReceiveMessageSize = 1024 * 1024 * 1000;
         });
         builder.Services.AddCors();
